@@ -1,7 +1,7 @@
 # PUBGSearch
 ![Python 3.5](https://img.shields.io/badge/python-3.5-blue.svg)
 
-PUBGSearch is a Python wrapper for pubg developer api for searching stats
+PUBGSearch is a simple Python wrapper for pubg developer api for searching stats
 
 Because of the "app rate limit", only the information from the last five games is retrieved
 
@@ -87,3 +87,25 @@ result:
 ```
 
 you can use [property](https://documentation.playbattlegrounds.com/en/matches.html)
+
+
+### Example code
+```python
+from pubgSearch import pubg_auth
+from pubgSearch import pubg_data
+api_key =""
+authinfo = pubg_auth.PubgAuth(api_key)
+Player = pubg_data.PubgPlayer('zigza9', authinfo)
+get_matches = Player.get_latest_matches()
+match_result = pubg_data.PubgMatch(get_matches, 'zigza9', authinfo)
+data_set, info_set = match_result.get_data()
+print("kills: ", data_set[1].kills)
+print("damageDealt: ", data_set[1].damageDealt)
+print("map name: ", info_set[1].mapName)
+```
+result
+```python
+kills:  3
+damageDealt:  372.52063
+map name:  Erangel_Main
+```
